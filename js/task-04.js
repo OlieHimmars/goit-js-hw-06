@@ -15,10 +15,9 @@ const decrBtn = document.querySelector('button[data-action="decrement"]');
 const incrBtn = document.querySelector('button[data-action="increment"]');
 
 decrBtn.addEventListener('click', function () {
-    if(counterValue.value > 0) {
         counterValue.decrement();
         valueEl.textContent = counterValue.value;
-    };
+    
 })
 
 incrBtn.addEventListener('click', function () {
