@@ -5,40 +5,36 @@ function getRandomHexColor() {
 const refs = {
   input: document.querySelector('#controls input'),
   boxes: document.querySelector('#boxes'),
-  createBtn: document.querySelector('#controls button'),
-  destroyBtn: document.querySelector('[data-action="destroy"]'),
+  createBtn: document.querySelector('#controls [data-create]'),
+  destroyBtn: document.querySelector('#controls [data-destroy]'),
+  //ось так не працює
+  //destroyBtn: document.querySelector('[data-action="destroy"]'),
   //createBtn: document.querySelector('[data-action="create"]'),
 }
-//destroyBtn = refs.createBtn.nextElementSibling;
-//console.log(destroyBtn);
 
-const frag = document.createDocumentFragment();
+const fragment = document.createDocumentFragment();
 
 refs.createBtn.addEventListener('click', createBoxes);
-//refs.destroyBtn.addEventListener('click', destroyAll);
-
-const num = Number(refs.input.value)
-console.log(num);
+refs.destroyBtn.addEventListener('click', destroyAll);
 
 function createBoxes(num) {
-  refs.boxes.classList.add('image--item');
-  for (let i = 0; i < Number(refs.input.value); i += 1) {
-    console.log('hi');
-    const box = '<div height=100px ></div >';
-    //box.style.color = getRandomHexColor();
-    console.log(box);
-    frag.append(box);
-    console.log(frag);
-}
-};
+  num = refs.input.value;
+  let baseBoxSize = 30;
+  refs.boxes.style.display = 'flex';
 
-refs.boxes.insertAdjacentHTML('beforeend', frag);
+  for (let i = 0; i < num; i += 1) {
+    const box = document.createElement("div");
+    box.style.backgroundColor = getRandomHexColor();
+    box.style.width = `${baseBoxSize}px`;
+    box.style.height = `${baseBoxSize}px`;
+    fragment.appendChild(box);
+    baseBoxSize += 10;
+  }
+  //ось так не працює
+//  refs.boxes.insertAdjacentHTML('beforeend', fragment);
+  refs.boxes.appendChild(fragment);
+};
 
 function destroyAll(event) {
-  console.log('hi');
-  refs.boxes = '';
+  refs.boxes.innerHTML = '';
 };
-
-
-
-
